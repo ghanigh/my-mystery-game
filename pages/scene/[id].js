@@ -1,10 +1,9 @@
-// pages/scene/[id].js
-
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { getSceneById } from '../../data/scenes';
 import SceneDisplay from '../../components/SceneDisplay';
 import Link from 'next/link';
+import YouTubeAudio from '../../components/YouTubeAudio'; // 👈 import ajouté
 
 export default function ScenePage() {
   const router = useRouter();
@@ -24,6 +23,7 @@ export default function ScenePage() {
 
   return (
     <div>
+      <YouTubeAudio /> {/* 👈 Audio d'ambiance invisible */}
       <SceneDisplay scene={scene} />
       {scene.nextScene && (
         <Link href={`/scene/${scene.nextScene}`}>

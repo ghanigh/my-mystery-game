@@ -1,9 +1,9 @@
-/* === STYLES GLOBAUX === */
-html, body {
+html,
+body {
   padding: 0;
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: radial-gradient(ellipse at center, #0f0f0f 0%, #000000 100%);
+  font-family: 'Orbitron', sans-serif;
+  background-color: #0a0f1c; /* Bleu nuit futuriste */
   color: #e0e0e0;
   overflow-x: hidden;
 }
@@ -18,8 +18,8 @@ a {
 }
 
 h1, h2, h3 {
-  color: #64ffda;
-  text-shadow: 0 0 10px rgba(100, 255, 218, 0.8);
+  color: #00ffc8;
+  text-shadow: 0 0 10px #00ffc8, 0 0 20px #00ffc8;
 }
 
 p {
@@ -35,24 +35,17 @@ li {
   margin-bottom: 0.5em;
 }
 
-/* === BOUTONS === */
 button {
-  position: relative;
-  background: linear-gradient(145deg, #1f1f1f, #3a3a3a);
-  color: white;
-  padding: 0.8em 2em;
-  border: none;
-  border-radius: 10px;
+  background-color: #1f1f3a;
+  color: #00ffc8;
+  padding: 0.7em 1.5em;
+  border: 2px solid #00ffc8;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 1em;
-  transition: transform 0.2s ease;
-  box-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
+  position: relative;
   overflow: hidden;
-}
-
-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(0, 123, 255, 0.9);
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 button::after {
@@ -60,42 +53,50 @@ button::after {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.2) 10%, transparent 10.01%);
-  background-repeat: no-repeat;
-  background-position: 50%;
-  transform: translate(-50%, -50%) scale(0);
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, #00ffc8 10%, transparent 10.01%);
+  background-size: 10px 10px;
+  transform: translate(-50%, -50%);
   opacity: 0;
-  transition: transform 0.5s, opacity 1s;
+  transition: opacity 0.3s, width 0.6s ease, height 0.6s ease;
+  pointer-events: none;
 }
 
 button:active::after {
-  transform: translate(-50%, -50%) scale(1);
-  opacity: 1;
+  width: 200px;
+  height: 200px;
+  opacity: 0.3;
   transition: 0s;
 }
 
-/* === INPUT === */
-input[type="text"] {
-  padding: 0.5em;
-  border: 1px solid #333;
-  border-radius: 3px;
-  background-color: #212121;
-  color: #f0f0f0;
-  width: 100%;
-  margin-bottom: 1em;
+button:hover {
+  background-color: #00ffc820;
+  transform: scale(1.05);
 }
 
-/* === SCENE === */
+input[type="text"] {
+  padding: 0.5em;
+  border: 1px solid #00ffc8;
+  border-radius: 5px;
+  background-color: #10172a;
+  color: #00ffc8;
+  transition: box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus {
+  box-shadow: 0 0 5px 2px #00ffc8;
+  outline: none;
+}
+
 .scene-container {
   max-width: 800px;
   margin: 20px auto;
   padding: 20px;
-  background: rgba(30, 30, 30, 0.9);
+  background-color: #151b2c;
   border-radius: 12px;
-  box-shadow: 0 0 20px rgba(100, 255, 218, 0.1);
-  animation: fadeIn 1s ease-in-out;
+  box-shadow: 0 0 15px rgba(0, 255, 200, 0.3);
+  animation: fadeIn 1s ease;
 }
 
 @keyframes fadeIn {
@@ -110,41 +111,39 @@ input[type="text"] {
 .puzzle-container {
   margin-top: 20px;
   padding: 15px;
-  border: 1px solid #333;
-  border-radius: 10px;
-  background-color: #2a2a2a;
-  animation: fadeIn 0.6s ease-in-out;
+  border: 2px solid #00ffc8;
+  border-radius: 8px;
+  background-color: #0e1320;
 }
 
 .puzzle-container h3 {
-  color: #f44336;
-  text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  color: #ff00c8;
+  text-shadow: 0 0 8px #ff00c8;
 }
 
 .puzzle-feedback {
   margin-top: 10px;
   font-weight: bold;
-  transition: color 0.3s ease, transform 0.3s ease;
+  font-size: 1.2em;
+  transition: all 0.5s ease;
 }
 
 .puzzle-feedback.success {
-  color: #4caf50;
-  text-shadow: 0 0 8px #4caf50;
-  animation: pulseSuccess 0.6s ease-in-out;
+  color: #00ff77;
+  animation: pulseSuccess 1s ease;
 }
 
 .puzzle-feedback.failure {
-  color: #f44336;
-  animation: shake 0.3s ease-in-out;
+  color: #ff0044;
+  animation: shakeError 0.5s ease;
 }
 
 @keyframes pulseSuccess {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); text-shadow: 0 0 8px #00ff77; }
 }
 
-@keyframes shake {
+@keyframes shakeError {
   0% { transform: translateX(0); }
   25% { transform: translateX(-5px); }
   50% { transform: translateX(5px); }
@@ -155,46 +154,27 @@ input[type="text"] {
 .next-scene-button {
   display: inline-block;
   margin-top: 20px;
-  padding: 12px 24px;
-  background-color: #4caf50;
-  color: white;
+  padding: 10px 20px;
+  background-color: #00ff77;
+  color: #000;
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 8px;
+  font-weight: bold;
   transition: background-color 0.3s ease, transform 0.3s ease;
-  animation: fadeIn 1s ease-in-out;
 }
 
 .next-scene-button:hover {
-  background-color: #388e3c;
-  transform: scale(1.05);
+  background-color: #00cc66;
+  transform: scale(1.1);
 }
 
-/* === RESPONSIVE === */
 @media (max-width: 600px) {
   .scene-container {
     margin: 10px;
     padding: 15px;
   }
-
   button, input[type="text"] {
     font-size: 0.9em;
     padding: 0.5em 1em;
   }
-}
-
-/* === PARTICULES / ÉTOILES === */
-@keyframes starburst {
-  from { transform: scale(0); opacity: 1; }
-  to { transform: scale(4); opacity: 0; }
-}
-
-.star-effect {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background-color: yellow;
-  border-radius: 50%;
-  pointer-events: none;
-  animation: starburst 0.6s ease-out;
-  z-index: 999;
 }
