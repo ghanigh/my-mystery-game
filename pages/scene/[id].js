@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { getSceneById } from '../../data/scenes';
 import SceneDisplay from '../../components/SceneDisplay';
 import Link from 'next/link';
-import YouTubeAudio from '../../components/YouTubeAudio'; // 👈 import ajouté
+import YouTubeAudio from '../../components/YouTubeAudio'; 
 
 export default function ScenePage() {
   const router = useRouter();
